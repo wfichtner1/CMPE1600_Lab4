@@ -12,14 +12,14 @@ using GDIDrawer;
 namespace CMPE1600_Lab4
 {
     public partial class Form1 : Form
-    {
-        CDrawer canvas = new CDrawer();
+    {       
         byte[ , ] backgroundArr = new byte[80, 60];
         byte[,] foregroundArr = new byte[80, 60];
 
         public Form1()
         {
             InitializeComponent();
+            CDrawer canvas = new CDrawer();
             canvas.Scale = 10;
         }
     }
