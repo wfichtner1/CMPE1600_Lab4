@@ -28,7 +28,8 @@ namespace CMPE1600_Lab4
             RandomizeForeground();
 
         }
-
+        //Fills foreground array with a specific
+        //amount of random cells
         private void RandomizeForeground()
         {
             Random rand = new Random();
@@ -54,6 +55,7 @@ namespace CMPE1600_Lab4
             }
         }
 
+        //Starts the life cycle and opens the speed dialog
         private void UI_StartButton_Click(object sender, EventArgs e)
         {
             if (null == dlg)
@@ -70,6 +72,7 @@ namespace CMPE1600_Lab4
             UI_StartButton.Enabled = false;
             UI_StopButton.Enabled = true;
         }
+        //stops the timer when speed dialog is closed
         private void CallbackDlgClosing()
         {
             
@@ -77,10 +80,14 @@ namespace CMPE1600_Lab4
             UI_StartButton.Enabled = true;
             UI_StopButton.Enabled = false;
         }
+        //changes the timer interval when speed value is
+        //modified in speed dialog
         private void CallbackSpeedChanged(int value)
         {
             timer1.Interval = value;
         }
+        //Draws the current contents of the specified array
+        //onto the gdi canvas
         private void DisplayArray(byte[,] arr)
         {
             canvas.BBColour = Color.Black;
@@ -96,7 +103,8 @@ namespace CMPE1600_Lab4
                 }
             }
         }
-
+        //Performs the inspection of each cell
+        //to determine if alive or dead
         public byte[,] CellInvestigate(byte[,] arr)
         {
             int counter = 0;
@@ -269,21 +277,21 @@ namespace CMPE1600_Lab4
             }
             return counter;
         }
-
+        //Steps through one iteration of the life cycle
         private void UI_CycleButton_Click(object sender, EventArgs e)
         {
             cycleCount++;
             UI_CycleLabel.Text = cycleCount.ToString();
             LifeCycle(foregroundArr);
-            DisplayArray(backgroundArr);
+            DisplayArray(foregroundArr);
         }
-
+        //calls the investigation of cells in foreground array
         private void LifeCycle(byte[ , ] arr)
         {
             backgroundArr = CellInvestigate(arr);
             foregroundArr = backgroundArr;        
         }
-
+        //itirates through life cycle
         private void timer1_Tick(object sender, EventArgs e)
         {
                         
@@ -292,7 +300,7 @@ namespace CMPE1600_Lab4
             cycleCount++;
             UI_CycleLabel.Text = cycleCount.ToString();
         }
-
+        //stops iteration of life cycle
         private void UI_StopButton_Click(object sender, EventArgs e)
         {
             dlg.Hide();
@@ -300,7 +308,7 @@ namespace CMPE1600_Lab4
             UI_StopButton.Enabled = false;
             UI_StartButton.Enabled = true;
         }
-
+        //Creates a new pattern based on user inputs
         private void UI_NewPatternButton_Click(object sender, EventArgs e)
         {
             NewPatternForm dialog = new NewPatternForm();
