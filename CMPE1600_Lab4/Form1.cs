@@ -14,7 +14,7 @@ namespace CMPE1600_Lab4
     public partial class Form1 : Form
     {
         SpeedForm dlg = null;
-        CDrawer canvas = new CDrawer();
+        CDrawer canvas = new CDrawer(800, 600, false);
         byte[,] backgroundArr = new byte[80, 60];
         byte[,] foregroundArr = new byte[80, 60];
         int cycleCount = 0;
@@ -26,7 +26,6 @@ namespace CMPE1600_Lab4
             InitializeComponent();
             canvas.Scale = 10;
             RandomizeForeground();
-
         }
         //Fills foreground array with a specific
         //amount of random cells
@@ -96,23 +95,27 @@ namespace CMPE1600_Lab4
             {
                 for (int j = 0; j < 60; j++)
                 {
-                    if (arr[i, j] != 0)
+                    if (arr[i, j] == 1)
                     {
                         canvas.SetBBScaledPixel(i, j, userColor);
                     }
                 }
             }
+
+            canvas.Render();
         }
         //Performs the inspection of each cell
         //to determine if alive or dead
         public byte[,] CellInvestigate(byte[,] arr)
         {
-            int counter = 0;
+            
             byte[,] arr2 = new byte[80, 60];
             for (int x = 0; x < 80; x++)
             {
                 for (int y = 0; y < 60; y++)
                 {
+                    int counter = 0;
+
                     if (((x == 0) && (y == 0)) || ((x == 0) && (y == 59)) || ((x == 79) && (y == 0)) || ((x == 79) && (y == 59)))
                     {
                         counter = CornerCheck(arr, x, y);
@@ -127,7 +130,6 @@ namespace CMPE1600_Lab4
                     }
                     else
                     {
-
                         if (arr[x - 1, y - 1] == 1)
                             counter++;
                         if (arr[x, y - 1] == 1)
@@ -145,7 +147,6 @@ namespace CMPE1600_Lab4
                         if (arr[x + 1, y + 1] == 1)
                             counter++;
                     }
-
                     if (arr[x, y] == 1)
                     {
                         if (counter < 2)
@@ -160,10 +161,8 @@ namespace CMPE1600_Lab4
                         if (counter == 3)
                             arr2[x, y] = 1;
                     }
-
                 }
             }
-
             return arr2;
         }
         //Special case for corner analysis
@@ -320,7 +319,8 @@ namespace CMPE1600_Lab4
             }
             RandomizeForeground();
             DisplayArray(foregroundArr);
-            cycleCount = 0;            
+            cycleCount = 0;
+            UI_CycleLabel.Text = "0";
         }
     }
 }
