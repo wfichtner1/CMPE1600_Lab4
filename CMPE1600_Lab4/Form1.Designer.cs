@@ -46,6 +46,7 @@
             this.UI_NewPatternButton.TabIndex = 0;
             this.UI_NewPatternButton.Text = "New Pattern";
             this.UI_NewPatternButton.UseVisualStyleBackColor = true;
+            this.UI_NewPatternButton.Click += new System.EventHandler(this.UI_NewPatternButton_Click);
             // 
             // UI_StartButton
             // 

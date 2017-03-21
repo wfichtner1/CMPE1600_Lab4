@@ -13,18 +13,35 @@ namespace CMPE1600_Lab4
 {
     public partial class Form1 : Form
     {
+        SpeedForm dlg = null;
         CDrawer canvas = new CDrawer();
         byte[,] backgroundArr = new byte[80, 60];
         byte[,] foregroundArr = new byte[80, 60];
         int cycleCount = 0;
+        int initialCells = 1000;
+        Color userColor = Color.Red;
 
         public Form1()
         {
             InitializeComponent();
             canvas.Scale = 10;
+            RandomizeForeground();
+
+        }
+
+        private void RandomizeForeground()
+        {
             Random rand = new Random();
 
-            for (int i = 0; i < 1001; i++)
+            for(int x = 0; x < 80; x++)
+            {
+                for(int y = 0; y < 60; y++)
+                {
+                    foregroundArr[x, y] = 0;
+                }
+            }
+
+            for (int i = 0; i < initialCells + 1; i++)
             {
                 int xcoor = rand.Next(80);
                 int ycoor = rand.Next(60);
@@ -35,16 +52,35 @@ namespace CMPE1600_Lab4
                 }
 
             }
-
         }
 
         private void UI_StartButton_Click(object sender, EventArgs e)
         {
+            if (null == dlg)
+            {
+                dlg = new SpeedForm();
+
+                dlg._dSpeedChanged = new delVoidInt(CallbackSpeedChanged);
+
+                dlg._dFormClosing = new delVoidVoid(CallbackDlgClosing);
+            }
+            dlg.Show();
+
             timer1.Enabled = true;
             UI_StartButton.Enabled = false;
             UI_StopButton.Enabled = true;
         }
-
+        private void CallbackDlgClosing()
+        {
+            
+            timer1.Enabled = false;
+            UI_StartButton.Enabled = true;
+            UI_StopButton.Enabled = false;
+        }
+        private void CallbackSpeedChanged(int value)
+        {
+            timer1.Interval = value;
+        }
         private void DisplayArray(byte[,] arr)
         {
             canvas.BBColour = Color.Black;
@@ -55,7 +91,7 @@ namespace CMPE1600_Lab4
                 {
                     if (arr[i, j] != 0)
                     {
-                        canvas.SetBBScaledPixel(i, j, Color.Red);
+                        canvas.SetBBScaledPixel(i, j, userColor);
                     }
                 }
             }
@@ -236,6 +272,8 @@ namespace CMPE1600_Lab4
 
         private void UI_CycleButton_Click(object sender, EventArgs e)
         {
+            cycleCount++;
+            UI_CycleLabel.Text = cycleCount.ToString();
             LifeCycle(foregroundArr);
             DisplayArray(backgroundArr);
         }
@@ -257,9 +295,24 @@ namespace CMPE1600_Lab4
 
         private void UI_StopButton_Click(object sender, EventArgs e)
         {
+            dlg.Hide();
             timer1.Enabled = false;
             UI_StopButton.Enabled = false;
             UI_StartButton.Enabled = true;
+        }
+
+        private void UI_NewPatternButton_Click(object sender, EventArgs e)
+        {
+            NewPatternForm dialog = new NewPatternForm();
+
+            if(DialogResult.OK == dialog.ShowDialog())
+            {
+                initialCells = dialog.pCells;
+                userColor = dialog.pColor;
+            }
+            RandomizeForeground();
+            DisplayArray(foregroundArr);
+            cycleCount = 0;            
         }
     }
 }

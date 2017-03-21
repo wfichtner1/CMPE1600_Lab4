@@ -64,6 +64,7 @@
             this.UI_RedRadio.TabStop = true;
             this.UI_RedRadio.Text = "Red";
             this.UI_RedRadio.UseVisualStyleBackColor = true;
+            this.UI_RedRadio.CheckedChanged += new System.EventHandler(this.UI_RedRadio_CheckedChanged);
             // 
             // UI_GreenRadio
             // 
@@ -75,6 +76,7 @@
             this.UI_GreenRadio.TabStop = true;
             this.UI_GreenRadio.Text = "Green";
             this.UI_GreenRadio.UseVisualStyleBackColor = true;
+            this.UI_GreenRadio.CheckedChanged += new System.EventHandler(this.UI_GreenRadio_CheckedChanged);
             // 
             // UI_GreyRadio
             // 
@@ -86,6 +88,7 @@
             this.UI_GreyRadio.TabStop = true;
             this.UI_GreyRadio.Text = "Grey";
             this.UI_GreyRadio.UseVisualStyleBackColor = true;
+            this.UI_GreyRadio.CheckedChanged += new System.EventHandler(this.UI_GreyRadio_CheckedChanged);
             // 
             // trackBar1
             // 
@@ -97,6 +100,7 @@
             this.trackBar1.TabIndex = 1;
             this.trackBar1.TickFrequency = 100;
             this.trackBar1.Value = 100;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label1
             // 
@@ -133,6 +137,7 @@
             this.UI_OKButton.TabIndex = 5;
             this.UI_OKButton.Text = "OK";
             this.UI_OKButton.UseVisualStyleBackColor = true;
+            this.UI_OKButton.Click += new System.EventHandler(this.UI_OKButton_Click);
             // 
             // UI_CancelButton
             // 
@@ -142,6 +147,7 @@
             this.UI_CancelButton.TabIndex = 6;
             this.UI_CancelButton.Text = "Cancel";
             this.UI_CancelButton.UseVisualStyleBackColor = true;
+            this.UI_CancelButton.Click += new System.EventHandler(this.UI_CancelButton_Click);
             // 
             // NewPatternForm
             // 

@@ -43,7 +43,8 @@
             this.trackBar1.Size = new System.Drawing.Size(260, 45);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.TickFrequency = 100;
-            this.trackBar1.Value = 200;
+            this.trackBar1.Value = 1000;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label1
             // 
@@ -73,6 +74,7 @@
             this.Controls.Add(this.trackBar1);
             this.Name = "SpeedForm";
             this.Text = "SpeedForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SpeedForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
