@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.UI_NewPatternButton = new System.Windows.Forms.Button();
             this.UI_StartButton = new System.Windows.Forms.Button();
             this.UI_StopButton = new System.Windows.Forms.Button();
             this.UI_CycleButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.UI_CycleLabel = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // UI_NewPatternButton
@@ -54,6 +56,7 @@
             this.UI_StartButton.Tag = "";
             this.UI_StartButton.Text = "Start";
             this.UI_StartButton.UseVisualStyleBackColor = true;
+            this.UI_StartButton.Click += new System.EventHandler(this.UI_StartButton_Click);
             // 
             // UI_StopButton
             // 
@@ -64,6 +67,7 @@
             this.UI_StopButton.TabIndex = 2;
             this.UI_StopButton.Text = "Stop";
             this.UI_StopButton.UseVisualStyleBackColor = true;
+            this.UI_StopButton.Click += new System.EventHandler(this.UI_StopButton_Click);
             // 
             // UI_CycleButton
             // 
@@ -73,6 +77,7 @@
             this.UI_CycleButton.TabIndex = 3;
             this.UI_CycleButton.Text = "Cycle";
             this.UI_CycleButton.UseVisualStyleBackColor = true;
+            this.UI_CycleButton.Click += new System.EventHandler(this.UI_CycleButton_Click);
             // 
             // label1
             // 
@@ -93,6 +98,11 @@
             this.UI_CycleLabel.Size = new System.Drawing.Size(100, 29);
             this.UI_CycleLabel.TabIndex = 5;
             this.UI_CycleLabel.Text = "0";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -120,6 +130,7 @@
         private System.Windows.Forms.Button UI_CycleButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label UI_CycleLabel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
